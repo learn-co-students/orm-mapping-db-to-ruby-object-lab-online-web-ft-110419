@@ -40,8 +40,8 @@ class Student
     self.all.select {|student| student.grade < 12 }
   end
 
-  def self.first_X_students_in_grade_10(arg = 1)
-    self.students_below_12th_grade.select {|student| student.grade == 10}[0..arg - 1]
+  def self.first_X_students_in_grade_10(arg)
+    self.students_below_12th_grade.select {|student| student.grade == 10}[0..arg]
   end
 
   def self.first_student_in_grade_10
