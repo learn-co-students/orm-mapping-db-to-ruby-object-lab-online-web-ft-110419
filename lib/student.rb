@@ -27,32 +27,31 @@ class Student
    self.new_from_db(student_row)
   end
 
-  def self.count_all_students_in_grade_9
-      sql = "SELECT * FROM students WHERE grade < 9"
-      DB[:conn].execute(sql)
+  def self.all_students_in_grade_9
+    sql = "SELECT * FROM students WHERE grade = 9"
+    DB[:conn].execute(sql)
   end
 
- def self.students_below_12th_grade
-      sql = "SELECT * FROM students WHERE grade < 12"
-      DB[:conn].execute(sql)
-end
+   def self.students_below_12th_grade
+    sql = "SELECT * FROM students WHERE grade < 12"
+    DB[:conn].execute(sql)
+  end
 
+   def self.first_x_students_in_grade_10(x)
+    sql = "SELECT * FROM students WHERE grade = 10 LIMIT = ?"
+    DB[:conn].execute(sql, x)
+  end
 
- def self.first_x_students_in_grade_10(x)
-      sql = "SELECT * FROM students WHERE grade = 10 LIMIT ?"
-      DB[:conn].execute(sql, x)
- end
+   def self.first_student_in_grade_10
+    sql = "SELECT * FROM students WHERE grade = 10 LIMIT 1"
+    first_student_row = DB[:conn].execute(sql)[0]
+    self.new_from_db(first_student_row)
+  end
 
- def self.first_student_in_grade_10
-      sql = "SELECT * FROM students WHERE grade = 10 LIMIT 1"
-      first_student_row = DB[:conn].execute(sql)[0]
-      self.new_from_db(first_student_row)
- end
-
- def self.all_students_in_grade_X(x)
-      sql = "SELECT * FROM students WHERE grade = ?"
-      DB[:conn].execute(sql, x)
- end
+   def self.all_students_in_grade_X(x)
+    sql = "SELECT * FROM students WHERE grade = ?"
+    DB[:conn].execute(sql, x)
+  end
 
   def save
     sql = <<-SQL
